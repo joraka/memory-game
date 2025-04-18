@@ -19,7 +19,7 @@ let difficulty = "easy";
 let interval = null;
 const timeAllowed = 30;
 let timeLeft = timeAllowed;
-const allowedSteps = 30;
+const allowedSteps = 20;
 let stepsLeft = allowedSteps;
 
 boardEl.style.display = "none";
@@ -129,11 +129,12 @@ function onCardClick(event) {
 
 function triggerGameWon() {
   if (interval) clearInterval(interval);
-  clearStatuses();
+  
 
   setTimeout(() => {
     boardEl.style.opacity = "0";
     setTimeout(() => {
+      clearStatuses();
       boardEl.style.display = "none";
       boardEl.innerHTML = "";
       statusEl.innerHTML = "You won!";
@@ -143,11 +144,11 @@ function triggerGameWon() {
 
 function triggerGameLost(message = "You lost!") {
   if (interval) clearInterval(interval);
-  clearStatuses();
 
   setTimeout(() => {
     boardEl.style.opacity = "0";
     setTimeout(() => {
+      clearStatuses();
       boardEl.style.display = "none";
       boardEl.innerHTML = "";
       statusEl.innerHTML = message;

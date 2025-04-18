@@ -22,13 +22,8 @@ function start() {
   shuffledEmojiList.forEach((emoji) => {
     const card = document.createElement("div");
     card.classList.add("card", "flipped");
-
-    const cardEmojiEl = card.appendChild(document.createElement("div"));
-    card._emojiEl = cardEmojiEl;
     card._emoji = emoji;
     card.style.transform = "rotateY(180deg)";
-    // cardEmoji.innerText = emoji;
-
     card.addEventListener("click", onCardClick);
     boardEl.appendChild(card);
   });
@@ -43,15 +38,13 @@ function onCardClick(event) {
   const card = event.target;
   if (lastOpenedCards.size < 2 && !lastOpenedCards.has(card) && !correctCards.has(card)) {
     card.style.transform = "rotateY(0deg)";
-    card._emojiEl.style.opacity = "0";
 
     setTimeout(() => {
-      card._emojiEl.style.opacity = "1";
+      card.innerText = card._emoji;
     }, 100);
 
     card.classList.remove("flipped");
 
-    card._emojiEl.innerText = card._emoji;
     lastOpenedCards.add(card);
 
     //2 cards opened at the same time
@@ -75,6 +68,7 @@ function onCardClick(event) {
             card.classList.add("flipped");
             card.style.transform = "rotateY(180deg)";
             lastOpenedCards.delete(card);
+            card.innerText = "";
           }
         }, 500);
       }

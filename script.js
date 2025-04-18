@@ -135,6 +135,7 @@ function triggerGameWon() {
     boardEl.style.opacity = "0";
     setTimeout(() => {
       boardEl.style.display = "none";
+      boardEl.innerHTML = "";
       statusEl.innerHTML = "You won!";
     }, 1000);
   }, 500);

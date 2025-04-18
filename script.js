@@ -26,6 +26,7 @@ function start() {
     const cardEmojiEl = card.appendChild(document.createElement("div"));
     card._emojiEl = cardEmojiEl;
     card._emoji = emoji;
+    card.style.transform = "rotateY(180deg)";
     // cardEmoji.innerText = emoji;
 
     card.addEventListener("click", onCardClick);
@@ -41,7 +42,15 @@ startBtnEl.addEventListener("click", () => {
 function onCardClick(event) {
   const card = event.target;
   if (lastOpenedCards.size < 2 && !lastOpenedCards.has(card) && !correctCards.has(card)) {
+    card.style.transform = "rotateY(0deg)";
+    card._emojiEl.style.opacity = "0";
+
+    setTimeout(() => {
+      card._emojiEl.style.opacity = "1";
+    }, 100);
+
     card.classList.remove("flipped");
+
     card._emojiEl.innerText = card._emoji;
     lastOpenedCards.add(card);
 
@@ -64,11 +73,10 @@ function onCardClick(event) {
         setTimeout(() => {
           for (const card of lastOpenedCards) {
             card.classList.add("flipped");
-            // hide emoji
-            card._emojiEl.innerHTML = "";
+            card.style.transform = "rotateY(180deg)";
             lastOpenedCards.delete(card);
           }
-        }, 750);
+        }, 500);
       }
     }
   }

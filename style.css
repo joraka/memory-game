@@ -38,6 +38,10 @@ button {
   margin: 0 auto;
 }
 
+.card:not(.matched){
+  cursor: pointer;
+}
+
 .card {
   width: 80px;
   height: 80px;
@@ -48,12 +52,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   user-select: none;
   transition: transform 0.3s ease, background-color 0.3s;
 }
 
-.card:hover {
+.card:hover:not(.matched) {
   transform: scale(1.05);
 }
 
@@ -64,17 +67,17 @@ button {
   box-shadow: inset 0 0 8px rgba(0, 150, 255, 0.2);
 }
 
-.card *, .card.disabled {
+.card.matched {
+  background-color: rgb(210, 210, 210);
+}
+
+.card *,
+.card.disabled {
   pointer-events: none;
 }
 
-.card.matched {
-  border: 5px solid red;
-}
-
-.card.flipped *{
+.card.flipped * {
   visibility: hidden;
-  border: 5px solid blue;
 }
 
 button {
